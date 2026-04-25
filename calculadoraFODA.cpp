@@ -6,18 +6,19 @@
 
 #include <iostream>
 using namespace std;
-
+//Criando uma funcao para cada operador
 void adicao() {
     int qtdNum;
     cout << "Quantos numeros?: ";
     cin >> qtdNum;
-
+    //verificador de erros
     if (qtdNum <= 0) {
         cout << "Quantidade invalida!" << endl;
         return;
     }
 
     double soma = 0;
+    //faz a operacao
     for (int i = 0; i < qtdNum; i++) {
         double num;
         cout << "Digite o numero " << i + 1 << ": ";
@@ -33,22 +34,23 @@ void subtracao() {
     int qtdNum;
     cout << "Quantos numeros?: ";
     cin >> qtdNum;
-
+    //verificador de erros
     if (qtdNum <= 0) {
         cout << "Quantidade invalida!" << endl;
         return;
     }
 
     double resultado;
+    //faz a operacao
     for (int i = 0; i < qtdNum; i++) {
         double num;
         cout << "Digite o numero " << i + 1 << ": ";
         cin >> num;
 
         if (i == 0)
-            resultado = num;      // primeiro numero e o valor inicial
+            resultado = num;      
         else
-            resultado -= num;     // subtrai os demais
+            resultado -= num;     
     }
 
     cout << "\n===== RESULTADO =====" << endl;
@@ -57,15 +59,17 @@ void subtracao() {
 
 void divisao() {
     int qtdNum;
+    
     cout << "Quantos numeros?: ";
     cin >> qtdNum;
-
+    //verificador de erros
     if (qtdNum <= 0) {
         cout << "Quantidade invalida!" << endl;
         return;
     }
 
     double resultado;
+    //faz a operacao
     for (int i = 0; i < qtdNum; i++) {
         double num;
         cout << "Digite o numero " << i + 1 << ": ";
@@ -90,13 +94,14 @@ void multiplicacao() {
     int qtdNum;
     cout << "Quantos numeros?: ";
     cin >> qtdNum;
-
+    //verificador de erros
     if (qtdNum <= 0) {
         cout << "Quantidade invalida!" << endl;
         return;
     }
 
-    double mul = 1;              // começa em 1, nao em 0
+    double mul = 1;  
+    //faz a operacao            
     for (int i = 0; i < qtdNum; i++) {
         double num;
         cout << "Digite o numero " << i + 1 << ": ";
@@ -107,7 +112,7 @@ void multiplicacao() {
     cout << "\n===== RESULTADO =====" << endl;
     cout << "Multiplicacao: " << mul << endl;
 }
-
+//Funcao principal chamando as funcoes e dando cout no 'menu'
 int main() {
     int respostaUsuario;
     do {
