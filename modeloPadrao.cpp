@@ -1,5 +1,5 @@
 /*
-   Autores: Caua Balzaneli, Valentino Hoehne
+   Autores: Caua Balzaneli
    Data: //2026
    Finalidade: 
 */

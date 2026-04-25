@@ -1,5 +1,5 @@
 /*
-   Autores: Caua Balzaneli, Valentino Hoehne
+   Autores: Caua Balzaneli
    Data: //2026
    Finalidade: Leia uma string e verifique se ela é um palíndromo (igual lida de trás para frente).
 */
