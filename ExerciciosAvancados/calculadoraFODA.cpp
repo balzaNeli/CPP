@@ -4,8 +4,49 @@
    Finalidade: calculadora foda
 */
 
+
 #include <iostream>
+#include <string>
 using namespace std;
+
+
+//=====ASSINATURAS=====
+void adicao();
+void subtracao();
+void divisao();
+void multiplicacao();
+void isPrimo();
+string primo(int divisores);
+
+//Funcao principal chamando as funcoes e dando cout no 'menu'
+int main() {
+    int respostaUsuario;
+    do {
+        cout << "\n===== CALCULADORA =====" << endl;
+        cout << "1. Adicao"        << endl;
+        cout << "2. Subtracao"     << endl;
+        cout << "3. Divisao"       << endl;
+        cout << "4. Multiplicacao" << endl;
+        cout << "5. Verificador de Primo"<< endl;
+        cout << "0. Sair"          << endl;
+        cout << "\n=======================" << endl;
+        cout << "Opcao: ";
+        cin >> respostaUsuario;
+
+        switch (respostaUsuario) {
+            case 1: adicao();        break;
+            case 2: subtracao();     break;
+            case 3: divisao();       break;
+            case 4: multiplicacao(); break;
+            case 5: isPrimo();       break;
+            case 0: cout << "Saindo..." << endl; break;
+            default: cout << "Opcao invalida!" << endl;
+        }
+    } while (respostaUsuario != 0);
+
+    return 0;
+}
+
 //Criando uma funcao para cada operador
 void adicao() {
     int qtdNum;
@@ -112,29 +153,32 @@ void multiplicacao() {
     cout << "\n===== RESULTADO =====" << endl;
     cout << "Multiplicacao: " << mul << endl;
 }
-//Funcao principal chamando as funcoes e dando cout no 'menu'
-int main() {
-    int respostaUsuario;
-    do {
-        cout << "\n===== CALCULADORA =====" << endl;
-        cout << "1. Adicao"        << endl;
-        cout << "2. Subtracao"     << endl;
-        cout << "3. Divisao"       << endl;
-        cout << "4. Multiplicacao" << endl;
-        cout << "0. Sair"          << endl;
-        cout << "\n=======================" << endl;
-        cout << "Opcao: ";
-        cin >> respostaUsuario;
 
-        switch (respostaUsuario) {
-            case 1: adicao();        break;
-            case 2: subtracao();     break;
-            case 3: divisao();       break;
-            case 4: multiplicacao(); break;
-            case 0: cout << "Saindo..." << endl; break;
-            default: cout << "Opcao invalida!" << endl;
+
+string primo(int divisores) {
+    if (divisores == 2) {
+        return "O numero EH primo.";
+    } else {
+        return "O numero NAO eh primo.";
+    }
+    
+}
+
+void isPrimo(){
+    int num, divisores = 0;
+
+    cout << "Digite um numero: ";
+    cin >> num;
+
+    for (int i = 1; i <= num; i++){
+        if(num % i == 0){
+            divisores++;
         }
-    } while (respostaUsuario != 0);
+    }
 
-    return 0;
+    cout << "========VERIFICADOR DE PRIMO========" << endl;
+    cout << "A quantidade de divisores eh: " << divisores << endl;
+    cout << primo(divisores) << endl;
+    cout << "\n========SAINDO..............========";
+    
 }
