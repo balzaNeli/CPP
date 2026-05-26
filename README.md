@@ -9,7 +9,7 @@ Repositório dedicado ao estudo e prática da linguagem **C++**, com exercícios
 ```
 CPP/
 ├── ExerciciosAvancados/   # Exercícios de nível avançado em C++
-├── ExerciciosFaceis/ 
+├── ExerciciosDoCurso/     # Exercicios feito no curso de DS
 ├── utils/                 # Funções e helpers reutilizáveis
 ├── output/                # Arquivos gerados pela compilação
 ├── .vscode/               # Configurações do editor VS Code
