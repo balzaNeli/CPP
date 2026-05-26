@@ -77,6 +77,10 @@ void ListaDeTarefa::concluirTarefa() {
 
 void Tarefa::exibir() const{
     string status;
+    if (tarefas.empty()) {
+        cout << "Nenhuma tarefa cadastrada!" << endl;
+        return;
+    }
     if (concluida == true) {
         status = "[X]";
     } else {
@@ -99,6 +103,10 @@ void ListaDeTarefa::adicionarTarefa() {
 }
 
 void ListaDeTarefa::removerTarefa(){
+    if (tarefas.empty()) {
+        cout << "Nenhuma tarefa cadastrada!" << endl;
+        return;
+    }
     int id;
     cout << "Qual tarefa quer remover?: ";
     for (const auto & tarefa : tarefas) {
