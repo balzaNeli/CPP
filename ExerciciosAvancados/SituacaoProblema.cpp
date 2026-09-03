@@ -4,14 +4,14 @@
 using namespace std;
 
 string FazerInscricao();
-string Robotica();
-string Programacao();
-string DesignGames();
-string Impressao3D();
-string CyberSeguranca();
-string IA();
-string EdicaoVideo();
-string RedesComp();
+int Robotica(bool decrementar = false);
+int Programacao(bool decrementar = false);
+int DesignGames(bool decrementar = false);
+int Impressao3D(bool decrementar = false);
+int CyberSeguranca(bool decrementar = false);
+int IA(bool decrementar = false);
+int EdicaoVideo(bool decrementar = false);
+int RedesComp(bool decrementar = false);
 void ListarVagas();
 
 int main() {
@@ -46,14 +46,14 @@ int main() {
 
 void ListarVagas() {
     cout << "\n===== Relatorio de Vagas =====" << endl;
-    cout << Robotica() << endl;
-    cout << Programacao() << endl;
-    cout << DesignGames() << endl;
-    cout << Impressao3D() << endl;
-    cout << CyberSeguranca() << endl;
-    cout << IA() << endl;
-    cout << EdicaoVideo() << endl;
-    cout << RedesComp() << endl;
+    cout << "Robotica: " << Robotica() << " vagas restantes" << endl;
+    cout << "Programacao: " << Programacao() << " vagas restantes" << endl;
+    cout << "Design de Games: " << DesignGames() << " vagas restantes" << endl;
+    cout << "Impressao 3D: " << Impressao3D() << " vagas restantes" << endl;
+    cout << "CyberSeguranca: " << CyberSeguranca() << " vagas restantes" << endl;
+    cout << "I.A: " << IA() << " vagas restantes" << endl;
+    cout << "Edicao de Video: " << EdicaoVideo() << " vagas restantes" << endl;
+    cout << "Redes de Computadores: " << RedesComp() << " vagas restantes" << endl;
     cout << "==============================" << endl;
 }
 
@@ -76,23 +76,24 @@ string FazerInscricao() {
         cout << "Opcao: ";
         cin >> respostaUsuario;
 
-        string resultado = "";
+        int vagasDisponiveis = 0;
 
         switch (respostaUsuario) {
-            case 1: resultado = Robotica(); break;
-            case 2: resultado = Programacao(); break;
-            case 3: resultado = DesignGames(); break;
-            case 4: resultado = Impressao3D(); break;
-            case 5: resultado = CyberSeguranca(); break;
-            case 6: resultado = IA(); break;
-            case 7: resultado = EdicaoVideo(); break;
-            case 8: resultado = RedesComp(); break;
+            case 1: vagasDisponiveis = Robotica(); break;
+            case 2: vagasDisponiveis = Programacao(); break;
+            case 3: vagasDisponiveis = DesignGames(); break;
+            case 4: vagasDisponiveis = Impressao3D(); break;
+            case 5: vagasDisponiveis = CyberSeguranca(); break;
+            case 6: vagasDisponiveis = IA(); break;
+            case 7: vagasDisponiveis = EdicaoVideo(); break;
+            case 8: vagasDisponiveis = RedesComp(); break;
             case 0: cout << "Voltando..." << endl; break;
             default: cout << "Opcao invalida!" << endl;
         }
 
         if (respostaUsuario >= 1 && respostaUsuario <= 8) {
-            if (resultado.find("0 vagas") != string::npos) {
+            // Agora testamos o numero inteiro direto!
+            if (vagasDisponiveis <= 0) {
                 cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
             } else {
                 string nome;
@@ -100,14 +101,15 @@ string FazerInscricao() {
                 cin.ignore();
                 getline(cin, nome);
 
-                if (respostaUsuario == 1) Robotica();
-                else if (respostaUsuario == 2) Programacao();
-                else if (respostaUsuario == 3) DesignGames();
-                else if (respostaUsuario == 4) Impressao3D();
-                else if (respostaUsuario == 5) CyberSeguranca();
-                else if (respostaUsuario == 6) IA();
-                else if (respostaUsuario == 7) EdicaoVideo();
-                else if (respostaUsuario == 8) RedesComp();
+                // Executa o decremento da vaga
+                if (respostaUsuario == 1) Robotica(true);
+                else if (respostaUsuario == 2) Programacao(true);
+                else if (respostaUsuario == 3) DesignGames(true);
+                else if (respostaUsuario == 4) Impressao3D(true);
+                else if (respostaUsuario == 5) CyberSeguranca(true);
+                else if (respostaUsuario == 6) IA(true);
+                else if (respostaUsuario == 7) EdicaoVideo(true);
+                else if (respostaUsuario == 8) RedesComp(true);
 
                 cout << "\n--- Inscricao Confirmada ---" << endl;
                 cout << "Nome: " << nome << endl;
@@ -119,114 +121,66 @@ string FazerInscricao() {
     return "";
 }
 
-string Robotica() {
+int Robotica(bool decrementar) {
     static int vagas = 40;
-    static bool efetuandoInscricao = false;
-
-    if (efetuandoInscricao) {
-        if (vagas > 0) vagas--;
-        efetuandoInscricao = false;
-        return "";
+    if (decrementar && vagas > 0) {
+        vagas--;
     }
-
-    efetuandoInscricao = true;
-    return "Robotica: " + to_string(vagas) + " vagas restantes";
+    return vagas;
 }
 
-string Programacao() {
+int Programacao(bool decrementar) {
     static int vagas = 50;
-    static bool efetuandoInscricao = false;
-
-    if (efetuandoInscricao) {
-        if (vagas > 0) vagas--;
-        efetuandoInscricao = false;
-        return "";
+    if (decrementar && vagas > 0) {
+        vagas--;
     }
-
-    efetuandoInscricao = true;
-    return "Programacao: " + to_string(vagas) + " vagas restantes";
+    return vagas;
 }
 
-string DesignGames() {
+int DesignGames(bool decrementar) {
     static int vagas = 30;
-    static bool efetuandoInscricao = false;
-
-    if (efetuandoInscricao) {
-        if (vagas > 0) vagas--;
-        efetuandoInscricao = false;
-        return "";
+    if (decrementar && vagas > 0) {
+        vagas--;
     }
-
-    efetuandoInscricao = true;
-    return "Design de Games: " + to_string(vagas) + " vagas restantes";
+    return vagas;
 }
 
-string Impressao3D() {
+int Impressao3D(bool decrementar) {
     static int vagas = 20;
-    static bool efetuandoInscricao = false;
-
-    if (efetuandoInscricao) {
-        if (vagas > 0) vagas--;
-        efetuandoInscricao = false;
-        return "";
+    if (decrementar && vagas > 0) {
+        vagas--;
     }
-
-    efetuandoInscricao = true;
-    return "Impressao 3D: " + to_string(vagas) + " vagas restantes";
+    return vagas;
 }
 
-string CyberSeguranca() {
+int CyberSeguranca(bool decrementar) {
     static int vagas = 25;
-    static bool efetuandoInscricao = false;
-
-    if (efetuandoInscricao) {
-        if (vagas > 0) vagas--;
-        efetuandoInscricao = false;
-        return "";
+    if (decrementar && vagas > 0) {
+        vagas--;
     }
-
-    efetuandoInscricao = true;
-    return "CyberSeguranca: " + to_string(vagas) + " vagas restantes";
+    return vagas;
 }
 
-string IA() {
+int IA(bool decrementar) {
     static int vagas = 35;
-    static bool efetuandoInscricao = false;
-
-    if (efetuandoInscricao) {
-        if (vagas > 0) vagas--;
-        efetuandoInscricao = false;
-        return "";
+    if (decrementar && vagas > 0) {
+        vagas--;
     }
-
-    efetuandoInscricao = true;
-    return "I.A: " + to_string(vagas) + " vagas restantes";
+    return vagas;
 }
 
-string EdicaoVideo() {
+int EdicaoVideo(bool decrementar) {
     static int vagas = 20;
-    static bool efetuandoInscricao = false;
-
-    if (efetuandoInscricao) {
-        if (vagas > 0) vagas--;
-        efetuandoInscricao = false;
-        return "";
+    if (decrementar && vagas > 0) {
+        vagas--;
     }
-
-    efetuandoInscricao = true;
-    return "Edicao de Video: " + to_string(vagas) + " vagas restantes";
+    return vagas;
 }
 
-string RedesComp() {
+int RedesComp(bool decrementar) {
     static int vagas = 20;
-    static bool efetuandoInscricao = false;
-
-    if (efetuandoInscricao) {
-        if (vagas > 0) vagas--;
-        efetuandoInscricao = false;
-        return "";
+    if (decrementar && vagas > 0) {
+        vagas--;
     }
-
-    efetuandoInscricao = true;
-    return "Redes de Computadores: " + to_string(vagas) + " vagas restantes";
+    return vagas;
 }
