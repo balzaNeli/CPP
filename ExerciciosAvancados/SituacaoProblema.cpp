@@ -1,33 +1,18 @@
-/*
-
-    Autores: Caua Balzaneli, Valentino Chagas Hoehne
-
-    Turma: 1C2
-
-    Data: 03/09/2026
-
-    Finalidade: A coordenação precisa distribuir os 240 alunos nas 8 oficinas 
-
-    respeitando todas as regras, e quer uma solução organizada e reutilizável.
-
-*/
-
-
-
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-void FazerInscricao();
-void Robotica();
-void Programacao();
-void DesignGames();
-void Impressao3D();
-void CyberSeguranca();
-void IA();
-void EdicaoVideo();
-void RedesComp();
+string FazerInscricao();
+string Robotica();
+string Programacao();
+string DesignGames();
+string Impressao3D();
+string CyberSeguranca();
+string IA();
+string EdicaoVideo();
+string RedesComp();
+void ListarVagas();
 
 int main() {
     int respostaUsuario;
@@ -35,6 +20,7 @@ int main() {
     do {
         cout << "\n===== Situacao-Problema =====" << endl;
         cout << "1. Fazer Inscricao" << endl;
+        cout << "2. Listar Vagas" << endl;
         cout << "0. Sair" << endl;
         cout << "\n=======================" << endl;
         cout << "Opcao: ";
@@ -43,6 +29,9 @@ int main() {
         switch (respostaUsuario) {
             case 1:
                 FazerInscricao();
+                break;
+            case 2:
+                ListarVagas();
                 break;
             case 0:
                 cout << "Saindo..." << endl;
@@ -55,7 +44,20 @@ int main() {
     return 0;
 }
 
-void FazerInscricao() {
+void ListarVagas() {
+    cout << "\n===== Relatorio de Vagas =====" << endl;
+    cout << Robotica() << endl;
+    cout << Programacao() << endl;
+    cout << DesignGames() << endl;
+    cout << Impressao3D() << endl;
+    cout << CyberSeguranca() << endl;
+    cout << IA() << endl;
+    cout << EdicaoVideo() << endl;
+    cout << RedesComp() << endl;
+    cout << "==============================" << endl;
+}
+
+string FazerInscricao() {
     int respostaUsuario;
 
     do {
@@ -74,185 +76,157 @@ void FazerInscricao() {
         cout << "Opcao: ";
         cin >> respostaUsuario;
 
+        string resultado = "";
+
         switch (respostaUsuario) {
-            case 1: Robotica(); break;
-            case 2: Programacao(); break;
-            case 3: DesignGames(); break;
-            case 4: Impressao3D(); break;
-            case 5: CyberSeguranca(); break;
-            case 6: IA(); break;
-            case 7: EdicaoVideo(); break;
-            case 8: RedesComp(); break;
+            case 1: resultado = Robotica(); break;
+            case 2: resultado = Programacao(); break;
+            case 3: resultado = DesignGames(); break;
+            case 4: resultado = Impressao3D(); break;
+            case 5: resultado = CyberSeguranca(); break;
+            case 6: resultado = IA(); break;
+            case 7: resultado = EdicaoVideo(); break;
+            case 8: resultado = RedesComp(); break;
             case 0: cout << "Voltando..." << endl; break;
             default: cout << "Opcao invalida!" << endl;
         }
+
+        if (respostaUsuario >= 1 && respostaUsuario <= 8) {
+            if (resultado.find("0 vagas") != string::npos) {
+                cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
+            } else {
+                string nome;
+                cout << "Digite o nome para inscricao: ";
+                cin.ignore();
+                getline(cin, nome);
+
+                if (respostaUsuario == 1) Robotica();
+                else if (respostaUsuario == 2) Programacao();
+                else if (respostaUsuario == 3) DesignGames();
+                else if (respostaUsuario == 4) Impressao3D();
+                else if (respostaUsuario == 5) CyberSeguranca();
+                else if (respostaUsuario == 6) IA();
+                else if (respostaUsuario == 7) EdicaoVideo();
+                else if (respostaUsuario == 8) RedesComp();
+
+                cout << "\n--- Inscricao Confirmada ---" << endl;
+                cout << "Nome: " << nome << endl;
+            }
+        }
+
     } while (respostaUsuario != 0);
+
+    return "";
 }
 
-void Robotica() {
+string Robotica() {
     static int vagas = 40;
-    string nome;
+    static bool efetuandoInscricao = false;
 
-    if (vagas <= 0) {
-        cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
-        return;
+    if (efetuandoInscricao) {
+        if (vagas > 0) vagas--;
+        efetuandoInscricao = false;
+        return "";
     }
 
-    cout << "Digite o nome para inscricao: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    vagas--;
-
-    cout << "\n--- Inscricao Confirmada ---" << endl;
-    cout << "Nome: " << nome << endl;
-    cout << "Oficina: Robotica" << endl;
-    cout << "Vagas restantes: " << vagas << endl;
+    efetuandoInscricao = true;
+    return "Robotica: " + to_string(vagas) + " vagas restantes";
 }
 
-void Programacao() {
+string Programacao() {
     static int vagas = 50;
-    string nome;
+    static bool efetuandoInscricao = false;
 
-    if (vagas <= 0) {
-        cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
-        return;
+    if (efetuandoInscricao) {
+        if (vagas > 0) vagas--;
+        efetuandoInscricao = false;
+        return "";
     }
 
-    cout << "Digite o nome para inscricao: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    vagas--;
-
-    cout << "\n--- Inscricao Confirmada ---" << endl;
-    cout << "Nome: " << nome << endl;
-    cout << "Oficina: Programacao" << endl;
-    cout << "Vagas restantes: " << vagas << endl;
+    efetuandoInscricao = true;
+    return "Programacao: " + to_string(vagas) + " vagas restantes";
 }
 
-void DesignGames() {
+string DesignGames() {
     static int vagas = 30;
-    string nome;
+    static bool efetuandoInscricao = false;
 
-    if (vagas <= 0) {
-        cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
-        return;
+    if (efetuandoInscricao) {
+        if (vagas > 0) vagas--;
+        efetuandoInscricao = false;
+        return "";
     }
 
-    cout << "Digite o nome para inscricao: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    vagas--;
-
-    cout << "\n--- Inscricao Confirmada ---" << endl;
-    cout << "Nome: " << nome << endl;
-    cout << "Oficina: Design de Games" << endl;
-    cout << "Vagas restantes: " << vagas << endl;
+    efetuandoInscricao = true;
+    return "Design de Games: " + to_string(vagas) + " vagas restantes";
 }
 
-void Impressao3D() {
+string Impressao3D() {
     static int vagas = 20;
-    string nome;
+    static bool efetuandoInscricao = false;
 
-    if (vagas <= 0) {
-        cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
-        return;
+    if (efetuandoInscricao) {
+        if (vagas > 0) vagas--;
+        efetuandoInscricao = false;
+        return "";
     }
 
-    cout << "Digite o nome para inscricao: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    vagas--;
-
-    cout << "\n--- Inscricao Confirmada ---" << endl;
-    cout << "Nome: " << nome << endl;
-    cout << "Oficina: Impressao 3D" << endl;
-    cout << "Vagas restantes: " << vagas << endl;
+    efetuandoInscricao = true;
+    return "Impressao 3D: " + to_string(vagas) + " vagas restantes";
 }
 
-void CyberSeguranca() {
+string CyberSeguranca() {
     static int vagas = 25;
-    string nome;
+    static bool efetuandoInscricao = false;
 
-    if (vagas <= 0) {
-        cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
-        return;
+    if (efetuandoInscricao) {
+        if (vagas > 0) vagas--;
+        efetuandoInscricao = false;
+        return "";
     }
 
-    cout << "Digite o nome para inscricao: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    vagas--;
-
-    cout << "\n--- Inscricao Confirmada ---" << endl;
-    cout << "Nome: " << nome << endl;
-    cout << "Oficina: CyberSeguranca" << endl;
-    cout << "Vagas restantes: " << vagas << endl;
+    efetuandoInscricao = true;
+    return "CyberSeguranca: " + to_string(vagas) + " vagas restantes";
 }
 
-void IA() {
+string IA() {
     static int vagas = 35;
-    string nome;
+    static bool efetuandoInscricao = false;
 
-    if (vagas <= 0) {
-        cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
-        return;
+    if (efetuandoInscricao) {
+        if (vagas > 0) vagas--;
+        efetuandoInscricao = false;
+        return "";
     }
 
-    cout << "Digite o nome para inscricao: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    vagas--;
-
-    cout << "\n--- Inscricao Confirmada ---" << endl;
-    cout << "Nome: " << nome << endl;
-    cout << "Oficina: I.A" << endl;
-    cout << "Vagas restantes: " << vagas << endl;
+    efetuandoInscricao = true;
+    return "I.A: " + to_string(vagas) + " vagas restantes";
 }
 
-void EdicaoVideo() {
+string EdicaoVideo() {
     static int vagas = 20;
-    string nome;
+    static bool efetuandoInscricao = false;
 
-    if (vagas <= 0) {
-        cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
-        return;
+    if (efetuandoInscricao) {
+        if (vagas > 0) vagas--;
+        efetuandoInscricao = false;
+        return "";
     }
 
-    cout << "Digite o nome para inscricao: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    vagas--;
-
-    cout << "\n--- Inscricao Confirmada ---" << endl;
-    cout << "Nome: " << nome << endl;
-    cout << "Oficina: Edicao de Video" << endl;
-    cout << "Vagas restantes: " << vagas << endl;
+    efetuandoInscricao = true;
+    return "Edicao de Video: " + to_string(vagas) + " vagas restantes";
 }
 
-void RedesComp() {
+string RedesComp() {
     static int vagas = 20;
-    string nome;
+    static bool efetuandoInscricao = false;
 
-    if (vagas <= 0) {
-        cout << "\nAs vagas se esgotaram! Por favor, escolha outra oficina." << endl;
-        return;
+    if (efetuandoInscricao) {
+        if (vagas > 0) vagas--;
+        efetuandoInscricao = false;
+        return "";
     }
 
-    cout << "Digite o nome para inscricao: ";
-    cin.ignore();
-    getline(cin, nome);
-
-    vagas--;
-
-    cout << "\n--- Inscricao Confirmada ---" << endl;
-    cout << "Nome: " << nome << endl;
-    cout << "Oficina: Redes de Computadores" << endl;
-    cout << "Vagas restantes: " << vagas << endl;
+    efetuandoInscricao = true;
+    return "Redes de Computadores: " + to_string(vagas) + " vagas restantes";
 }
